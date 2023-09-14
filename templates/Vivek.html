@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>header</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style> 
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+          }
+        /* Style the header */
+        .header {
+            padding: 60px;
+            text-align: center;
+            background: #faf0e6;
+            color: grey;
+        }
+        
+        /* Increase the font size of the h1 element */
+        .header h1 {
+            font-size: 40px;
+        }
+                
+        /* Column container */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        /* Create two unequal columns that sits next to each other */
+        /* Sidebar/left column */
+        .side {
+            flex: 30%; /* Set the width of the sidebar */
+            background-color: #f1f1f1; /* Grey background color */
+            padding: 20px; /* Some padding */
+        }
+        
+        /* Main column */
+        .main {
+            flex: 70%; /* Set the width of the main content */
+            background-color: white; /* White background color */
+            padding: 20px; /* Some padding */
+        }
+        /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 700px) {
+        .row {
+            flex-direction: column;
+        }
+        }
+
+    </style>
+</head>
+<body>
+    {%include "head.html"%}
+    <div id="container" style = "text-align:center">
+        <div class = "header">
+            <h1>Whatever you are not changing,</h1>
+            <h1 style= "color: #b7410e">you are choosing.</h1>
+            <p>A website created by Vivek.</p>
+        </div>
+        {%include "foot.html"%} 
+      </div>
+    
+      {% comment %} <div class="row">
+        <div class="side">
+            <form action= "{% url 'saveenquiry' %}" method= "post">
+               {% csrf_token %} 
+               {% if error %}
+               <div class="alert alert-danger" role ="alert">
+                Please enter a correct value
+               </div>
+               {% endif %}
+            <label for= id>customerID:</label><br>
+            <input type="name" id="id" name="id"><br>
+            <label for="name">customerName:</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="age">customerAge:</label><br>
+            <input type="number" id="age" name="age"><br>
+            <label for="dob">customerDOB:</label><br>
+            <input type="date" id="dob" name="dob"><br>
+            <label for="address">customerAddress:</label><br>
+            <input type="text" id="address" name="address"><br>
+            <input type="submit" value="Post">
+        </form>
+    </div> {% endcomment %}
+        <div class="main">
+            </div>
+      </div>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>form</title>
+        <style> 
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background: #333
+          }
+        /* Style the header */
+        .header {
+            padding: 60px;
+            text-align: center;
+            background: #faf0e6;
+            color: grey;
+            
+        }
+        
+        /* Increase the font size of the h1 element */
+        .header h1 {
+            font-size: 40px;
+        }
+        
+        /* Column container */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 10px;
+            width: 500px;
+            margin: auto;
+            text-align: center;
+        }
+            
+        /* Create two unequal columns that sits next to each other */
+        /* Sidebar/left column */
+        .side {
+            flex: 30%; /* Set the width of the sidebar */
+            background-color: #f1f1f1; /* Grey background color */
+            padding: 20px; /* Some padding */
+        }
+        
+        /* Main column */
+        .main {
+            flex: 70%; /* Set the width of the main content */
+            background-color: white; /* White background color */
+            padding: 20px; /* Some padding */
+        }
+
+        /* Form submission message */
+        .message {
+            display: inline;
+            padding: 10px;
+            width: 500px;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 700px) {
+        .row {
+            flex-direction: column;
+        }
+        }
+
+        /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+        @media screen and (max-width: 400px) {
+        .navbar a {
+            float: none;
+            width: 100%;
+        }
+        }
+    </style>
+    </head>
+        <body>
+            {%include "head.html"%}
+            
+            <div class="message">
+                {% if messages %}
+                <div class="mess">
+                    {% for message in messages %}
+                    <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div id="container" style = "text-align:center">
+                <div class = "header">
+                <h1 style= "color:#b7410e; font:"> Customer detail Form</h1>
+                    
+                </div>
+                <br>
+            
+
+                <div class="row">
+                    <div class="side">
+                        <form action= "{% url 'saveenquiry' %}" method= "post">
+                           {% csrf_token %} 
+                           {% if error %}
+                           <div class="alert alert-danger" role ="alert">
+                                Please enter a correct value
+                           </div>
+                           {% endif %}
+                            <label for= id>CustomerID:</label><br>
+                            <input type="name" id="id" name="id" placeholder="00000001"><br><br>
+                            <label for="name">CustomerName:</label><br>
+                            <input type="text" id="name" name="name" placeholder="Vivek"><br><br>
+                            <label for="age">CustomerAge:</label><br>
+                            <input type="number" id="age" name="age" placeholder="12"><br><br>
+                            <label for="dob">CustomerDOB:</label><br>
+                            <input type="date" id="dob" name="dob"><br><br>
+                            <label for="address">CustomerAddress:</label><br>
+                            <input type="text" id="address" name="address" placeholder="938 California Ave"><br><br>
+                            <input type="submit" value="Post">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% include "foot.html" %}
+        </body>
+
+        </html>
+
